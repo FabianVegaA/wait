@@ -1,0 +1,54 @@
+cabal-version:   3.4
+
+name:            wait
+
+version:         0.1.0.0
+
+synopsis:
+  A command to interrupt another command after a specified amount of time.
+
+license:         BSD-3-Clause
+
+license-file:    LICENSE
+
+author:          Fabián Vega
+
+category:        System
+
+build-type:      Simple
+
+extra-doc-files: CHANGELOG.md
+
+common warnings
+  ghc-options: -Wall
+
+library
+  exposed-modules:  Lib
+  hs-source-dirs:   src
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+  build-depends:
+    , base     ^>=4.16.4.0
+    , process
+
+  default-language: GHC2021
+
+executable wait
+  main-is:          Main.hs
+  build-depends:    base ^>=4.16.4.0, wait
+  hs-source-dirs:   app
+  default-language: GHC2021
+
+test-suite wait-test
+  type:             exitcode-stdio-1.0
+  main-is:          Spec.hs
+  hs-source-dirs:   tests
+  ghc-options:      -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+    , base        ^>=4.16.4.0
+    , process
+
+  default-language: Haskell2010
